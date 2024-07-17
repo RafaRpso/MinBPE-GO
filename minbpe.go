@@ -123,7 +123,6 @@ func MergePairs(config Config) map[PairUint16]int {
 }
 
 func GetVocabMerges(merges map[PairUint16]int) map[int][]byte {
-
 	vocab := make(map[int][]byte, 256)
 
 	for idx := 0; idx < 256; idx++ {
@@ -138,14 +137,12 @@ func GetVocabMerges(merges map[PairUint16]int) map[int][]byte {
 	return vocab
 }
 
-func Decode(vocab map[int][]byte) {
-	tokens := ""
-	for i := 0; i < len(vocab); i++ {
-		tokens := string(vocab[i])
-
+func Decode(tokens []uint16, vocab map[int][]byte) string {
+	decoded := []byte{}
+	for _, token := range tokens {
+		decoded = append(decoded, vocab[int(token)]...)
 	}
-	// socorro.
-
+	return string(decoded)
 }
 
 func Encode() {
@@ -153,17 +150,15 @@ func Encode() {
 }
 
 func main() {
-	//TODO: GET VOCAB
-	//TODO: DECODE
-	//TODO: ENCODE
-	// TODO: REGEX (GPT4)
-	// TODO: IMPLEMENTS TWO CHILDS : TOKENIZER CLASSIC, REGEX TOKENIZER
-
 	vsize := 276
 	config := Config{
 		vocabSize: vsize,
 		numMerges: vsize - 256,
 	}
-	merge := MergePairs(config)
-	fmt.Println(GetVocabMerges(merge))
+	merges := MergePairs(config)
+	vocab := GetVocabMerges(merges)
+
+	tokens, _ := GetVocab()
+	decodedString := Decode(tokens, vocab)
+	fmt.Println(decodedString)
 }
