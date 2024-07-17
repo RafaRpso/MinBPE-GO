@@ -122,6 +122,36 @@ func MergePairs(config Config) map[PairUint16]int {
 
 }
 
+func GetVocabMerges(merges map[PairUint16]int) map[int][]byte {
+
+	vocab := make(map[int][]byte, 256)
+
+	for idx := 0; idx < 256; idx++ {
+		vocab[idx] = []byte{byte(idx)}
+	}
+
+	for pair, idx := range merges {
+		p0, p1 := pair.p1, pair.p2
+		vocab[idx] = append(vocab[int(p0)], vocab[int(p1)]...)
+	}
+
+	return vocab
+}
+
+func Decode(vocab map[int][]byte) {
+	tokens := ""
+	for i := 0; i < len(vocab); i++ {
+		tokens := string(vocab[i])
+
+	}
+	// socorro.
+
+}
+
+func Encode() {
+
+}
+
 func main() {
 	//TODO: GET VOCAB
 	//TODO: DECODE
@@ -134,5 +164,6 @@ func main() {
 		vocabSize: vsize,
 		numMerges: vsize - 256,
 	}
-	fmt.Println(MergePairs(config))
+	merge := MergePairs(config)
+	fmt.Println(GetVocabMerges(merge))
 }
