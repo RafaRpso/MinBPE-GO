@@ -132,7 +132,13 @@ func MergePairs(config Config) map[PairUint16]int {
 }
 
 func main() {
-	vsize := 300
+	//TODO: GET VOCAB
+	//TODO: DECODE
+	//TODO: ENCODE
+	// TODO: REGEX (GPT4)
+	// TODO: IMPLEMENTS TWO CHILDS : TOKENIZER CLASSIC, REGEX TOKENIZER
+
+	vsize := 276
 	config := Config{
 		vocabSize: vsize,
 		numMerges: vsize - 256,
