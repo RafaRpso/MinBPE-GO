@@ -10,18 +10,9 @@ type Config struct {
 	numMerges int
 }
 
-type Pair struct {
-	p1 byte
-	p2 byte
-}
-
 type PairUint16 struct {
 	p1 uint16
 	p2 uint16
-}
-
-func train() {
-
 }
 
 func GetVocab() ([]uint16, error) {
